@@ -37,8 +37,8 @@ export default function Duration() {
   }
 
   return (
-    <div className="flex flex-col align-middle justify-center flex-1 min-h-0">
-      <div className='flex flex-row gap-4 min-h-0 justify-center items-center'>
+    <div className="flex flex-col align-middle justify-center gap-8 flex-1 min-h-0">
+      <div className='flex flex-col mt-8 lg:mt-0 lg:flex-row gap-4 min-h-0 justify-center items-center'>
         <div className='text-center'>
           <DatePicker
             className="max-w-md"
