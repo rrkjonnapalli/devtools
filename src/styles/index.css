@@ -1,0 +1,520 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap&family=Eagle+Lake');
+
+@import "tailwindcss";
+
+@plugin "./hero.ts";
+
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+/* Design System Variables */
+:root {
+  /* Golden Ratio Scale */
+  --space-unit: 1rem;
+  --space-sm: calc(var(--space-unit) / 1.618);
+  --space-md: var(--space-unit);
+  --space-lg: calc(var(--space-unit) * 1.618);
+  --space-xl: calc(var(--space-unit) * 2.618);
+  --space-xxl: calc(var(--space-unit) * 4.236);
+
+  /* Bubbly Card Properties */
+  --card-radius: 16px;
+  --card-padding: var(--space-xl);
+
+  /* Color System */
+  --color-bg: #ffffff;
+  --color-black: #1a202c;
+  --color-bg-alt: #f8fafc;
+  --color-card: #ffffff;
+  --color-text: #1a202c;
+  --color-text-light: #4a5568;
+  --color-primary: #2563eb;
+  --color-border: #e2e8f0;
+  --color-lblue: #a2d2ff;
+  --color-dblue: #004e98;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-title: 'Eagle Lake', serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Container Width */
+  --container-max-width: 1200px;
+  --container-padding: var(--space-md);
+}
+
+.dark {
+  --color-bg: #0f172a;
+  --color-bg-alt: #1e293b;
+  --color-card: #323843;
+  --color-text: #f1f5f9;
+  --color-text-light: #cbd5e1;
+  --color-primary: #3b82f6;
+  --color-border: #334155;
+  --color-dblue: #a2d2ff;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.CodeMirror {
+  height: auto;
+}
+
+
+/* Ensure CodeMirror 6 editor fills its parent container and that the
+   scroller uses full height so the editable area doesn't collapse to one
+   line. These class names are from CodeMirror 6's DOM structure. */
+.cm-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100% !important;
+}
+
+.cm-scroller {
+  flex: 1 1 auto;
+  height: 100% !important;
+  min-height: 0;
+  overflow: auto;
+}
+
+.cm-content {
+  min-height: 100%;
+}
+
+/* Targeted CodeMirror sizing: make the editor a flex column and ensure
+   the scroller fills available height without forcing all descendants
+   to 100% which can break line boxes. */
+.cm-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cm-editor>.cm-scroller,
+.cm-editor .cm-scroller {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.cm-editor .cm-content {
+  min-height: 100%;
+}
+
+/* Base Reset & Global Styles */
+* {
+  /* margin: 0;
+  padding: 0; */
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.6;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+/* Container */
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Card System - Consistent with Portfolio */
+.card {
+  background-color: var(--color-bg-alt);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  /* border: 1px solid var(--color-border); */
+  transition: all 0.3s ease;
+  /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Typography */
+.section-title {
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+/* Tools Page Complete Styles */
+.tools-container {
+  min-height: 100vh;
+  background-color: var(--color-bg-alt);
+  padding: var(--space-xl) 0;
+}
+
+.tools-header {
+  text-align: center;
+  margin-bottom: var(--space-xxl);
+  padding: 0 var(--container-padding);
+}
+
+.tools-title {
+  font-family: var(--font-body);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+}
+
+.tools-subtitle {
+  font-size: 1.25rem;
+  color: var(--color-text-light);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Search Section Styling */
+.search-section {
+  max-width: 800px;
+  margin: 0 auto var(--space-xxl);
+  padding: 0 var(--container-padding);
+}
+
+.search-container {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.search-input-container {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-md);
+}
+
+.search-icon {
+  position: absolute;
+  left: var(--space-lg);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-light);
+}
+
+.search-input {
+  margin-left: var(--space-md);
+  width: 100%;
+  padding: var(--space-lg) var(--space-lg) var(--space-lg) 3rem;
+  font-size: 1.1rem;
+  background: var(--color-card);
+  /* border: 2px solid var(--color-border); */
+  border-radius: var(--card-radius);
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  /* border-color: var(--color-primary); */
+  box-shadow: 0 0 0 1px rgba(168, 195, 255, 0.1);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-light);
+}
+
+.category-filter {
+  padding: var(--space-lg);
+  font-size: 1rem;
+  background: var(--color-card);
+  /* border: 2px solid var(--color-border); */
+  border-radius: var(--card-radius);
+  color: var(--color-text);
+  min-width: 160px;
+  cursor: pointer;
+}
+
+.category-filter:focus {
+  outline: none;
+}
+
+.results-count {
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+/* Tools Grid & Cards */
+.tools-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--space-lg);
+}
+
+.tool-card {
+  background: var(--color-card);
+  /* border: 1px solid var(--color-border); */
+  border-radius: var(--card-radius);
+  padding: var(--space-xl);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
+  /* box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15); */
+}
+
+.tool-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  /* margin-bottom: var(--space-lg); */
+}
+
+.tool-icon-container {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #BBECFF 0%, #8cadfa 40%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-black);
+  transition: transform 0.3s ease;
+}
+
+.tool-card:hover .tool-icon-container {
+  transform: scale(1.1);
+}
+
+.tool-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.tool-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.tool-name {
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-black);
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
+}
+
+.tool-description {
+  color: var(--color-black);
+  line-height: 1.5;
+  margin-bottom: var(--space-lg);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* limit to 2 lines */
+  line-clamp: 2;
+  /* standard property for compatibility */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tool-category {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--color-bg-alt);
+  color: var(--color-text-light);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--space-xxl);
+  color: var(--color-text-light);
+}
+
+.no-results-title {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tools-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  .category-filter {
+    min-width: auto;
+  }
+
+  .tool-card {
+    padding: var(--space-lg);
+  }
+
+  .tool-card-header {
+    gap: var(--space-md);
+  }
+
+  .tool-icon-container {
+    width: 50px;
+    height: 50px;
+  }
+
+  .tool-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tools-container {
+    padding: var(--space-lg) 0;
+  }
+
+  .tools-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .search-section {
+    margin-bottom: var(--space-xl);
+  }
+}
+
+/* Header layout with theme toggle */
+.header-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header-flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+.header-text-center {
+  flex: 1;
+  text-align: center;
+  padding: 0 var(--space-lg);
+}
+
+.header-spacer,
+.theme-toggle-wrapper {
+  width: 48px;
+  /* Same width as your theme toggle button */
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .header-flex-container {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .header-text-center {
+    padding: 0;
+    order: 1;
+  }
+
+  .theme-toggle-wrapper {
+    order: 2;
+  }
+
+  .header-spacer {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-input {
+    margin-left: 0;
+  }
+
+  .header-content-wrapper {
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background-color: var(--color-indigo-400);
+  /* border: 2px solid var(--color-border); */
+  border-radius: var(--card-radius);
+  color: var(--color-bg);
+  font-weight: var(--font-weight-medium);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.button-group {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-sm);
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-card);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.editor-container {
+  height: calc(100vh - 480px);
+}

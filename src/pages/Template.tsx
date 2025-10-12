@@ -1,0 +1,102 @@
+import AppEditor from "@components/JsonEditor";
+import { motion } from 'framer-motion';
+import { DynamicIcon } from "lucide-react/dynamic";
+import { addToast } from "@heroui/react";
+import { useState } from "react";
+
+const toolKey = 'template-data';
+
+const loadInitialData = () => {
+  const local = localStorage.getItem(toolKey);
+  let l1 = `Hello {name}, I'm still working`;
+  let l2 = JSON.stringify({
+    "name": "Tom"
+  });
+  if (local) {
+    try {
+      const parsed = JSON.parse(local);
+      if (parsed.s1) l1 = parsed.s1;
+      if (parsed.s2) l2 = parsed.s2;
+    } catch (err) {
+      console.error(`Error parsing local storage data for ${toolKey}`, err);
+    }
+  }
+  return { s1: l1, s2: l2 };
+}
+
+export default function JsonDiff() {
+  const { s1, s2 } = loadInitialData();
+  const [data1, setData1] = useState(s1);
+  const [data2, setData2] = useState(s2);
+  const [data3, setData3] = useState('');
+
+
+  const __getTextFromEditor = (data: string) => {
+    try {
+      if (!data || data.trim() === '') return null;
+      return JSON.parse(data);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      addToast({ title: 'Invalid JSON', description: String(msg), variant: 'flat', color: 'danger' });
+      return null;
+    }
+  }
+
+  const populate = () => {
+    // const _data1 = __getTextFromEditor(data1);
+    const _data2 = __getTextFromEditor(data2);
+    if (!data1 || !_data2) {
+      // parsing failed or empty editors — abort
+      return;
+    }
+    // const allDiffs = (checkJSONDiff(_data1, _data2) as Array<Diff>);
+    // const s1 = sortJSON(_data1);
+    // const s2 = sortJSON(_data2);
+    // _setNextEditor(1, s1);
+    // _setNextEditor(2, s2);
+    // const changes = allDiffs.filter(d => d.changed);
+    // setDifferences(changes);
+    console.log('Template input:', data1, _data2);
+    const result = data1.fmt(_data2);
+    console.log('Template result:', result);
+    setData3(result);
+    localStorage.setItem(toolKey, JSON.stringify({ s1: data1, s2: data2 }));
+  }
+
+
+  return (
+    <div className="flex flex-col flex-1 min-h-0">
+      {/* Button Container */}
+      <div className="flex lg:flex-row flex-col justify-center relative">
+        {/* Buttons - perfectly centered */}
+        <div className="button-group">
+          <motion.button
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => populate()}
+            className="action-button"
+          >
+            <span className="button-icon">
+              <DynamicIcon name="refresh-ccw-dot" className="icon" />
+            </span>
+            Populate
+          </motion.button>
+        </div>
+      </div>
+
+      {/* Editor Container */}
+      <div style={{ flex: 1, minHeight: 0 }}>
+        <div className="flex flex-col lg:flex-row gap-4 editor-container">
+          <AppEditor label="Enter Template" ext={[]} value={data1} onChange={setData1} />
+          <AppEditor label="Enter Input JSON" value={data2} onChange={setData2} />
+          {
+            data3.length > 0 && (
+              <AppEditor ext={[]} value={data3} />
+            )
+          }
+        </div>
+
+      </div>
+    </div>
+  );
+}
