@@ -3,7 +3,7 @@ import { DynamicIcon } from 'lucide-react/dynamic';
 
 export default function WIPPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-8">
+    <div className="flex flex-1 items-center justify-center px-4 py-8">
       <div className="text-center max-w-md">
         {/* Simple Icon */}
         <motion.div

@@ -133,7 +133,6 @@
 .footer {
   background-color: var(--color-card);
   border-top: 1px solid var(--color-border);
-  padding: var(--space-xl) 0 var(--space-lg);
   margin-top: auto;
 }
 
@@ -188,8 +187,6 @@
 
 .footer-bottom {
   text-align: center;
-  padding-top: var(--space-lg);
-  border-top: 1px solid var(--color-border);
   color: var(--color-text-light);
   font-size: 0.9rem;
 }
@@ -252,11 +249,6 @@
   .breadcrumbs-list {
     flex-wrap: wrap;
   }
-
-  .footer-bottom {
-    flex-direction: row;
-    justify-content: space-between;
-  }
   
   .developer-credit {
     margin-top: 0;
@@ -271,6 +263,6 @@
 }
 
 .developer-name {
-  color: var(--color-primary);
+  color: var(--color-lblue);
   font-weight: var(--font-weight-medium);
 }
