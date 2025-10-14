@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { useCodeMirror, type Extension } from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
+import { json } from '@codemirror/lang-json';
 import { useTheme } from 'src/contexts/ThemeContext';
 import '../styles/cm-editor.css';
-const extensions = [javascript()];
+const extensions = [json()];
 
 type AppEditorProps = {
   value: string;
