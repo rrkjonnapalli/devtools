@@ -69,7 +69,8 @@ export default function JsonFormatter() {
     }
   }
 
-  const __getTextFromEditor = (data: string) => {
+  const __getTextFromEditor = (data: string, plain?: boolean) => {
+    if (plain) return data;
     const val = JSON.parse(data);
     return val;
   }
@@ -85,7 +86,7 @@ export default function JsonFormatter() {
   }
 
   const unescape = () => {
-    let jsonString = __getTextFromEditor(data1);
+    let jsonString = __getTextFromEditor(data1, true);
     jsonString = `"${jsonString}"`;
     const dataStr = JSON.parse(jsonString);
     const data = JSON.parse(dataStr);
