@@ -1,6 +1,5 @@
 
 import { motion } from 'framer-motion';
-import { DynamicIcon } from "lucide-react/dynamic";
 import { addToast, DatePicker } from "@heroui/react";
 import { useState } from "react";
 import {
@@ -9,6 +8,7 @@ import {
 } from '@utils/date-utils';
 import { now, getLocalTimeZone } from "@internationalized/date";
 import { useDateFormatter } from '@react-aria/i18n'
+import { AppIcon } from '@/shared/icons';
 
 
 export default function Duration() {
@@ -21,13 +21,11 @@ export default function Duration() {
 
 
   const calculate = () => {
-    console.log('Calculate duration between', d1?.toString(), 'and', d2?.toString());
     // calculate duration between d1 and d2
     if (d1 && d2) {
       const _d1 = d1.toDate();
       const _d2 = d2.toDate();
       const diff = duration(_d1, _d2, getLocalTimeZone());
-      console.log('Duration is', diff);
       setDiffResult(diff);
       addToast({ title: 'Duration', description: `Duration is  ${diff.main}`, variant: 'flat', color: 'success', timeout: 8000 });
     } else {
@@ -76,7 +74,7 @@ export default function Duration() {
           className="action-button"
         >
           <span className="button-icon">
-            <DynamicIcon name="file-diff" className="icon" />
+            <AppIcon name="file-diff" className="icon" />
           </span>
           Calculate
         </motion.button>

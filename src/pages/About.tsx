@@ -1,9 +1,9 @@
+import { AppIcon, icons } from '@/shared/icons';
 import { motion } from 'framer-motion';
-import { DynamicIcon, type IconName } from 'lucide-react/dynamic';
 import { useNavigate } from 'react-router';
 
 type Feature = {
-  icon: IconName;
+  icon: keyof typeof icons;
   title: string;
   description: string;
 };
@@ -63,7 +63,7 @@ export default function AboutPage() {
         transition={{ duration: 0.6, delay: 0.1 }}
         className="card bg-alt p-8 mb-12 text-center"
       >
-        <DynamicIcon name="target" className="w-12 h-12 text-primary mx-auto mb-4" />
+        <AppIcon name="target" className="w-12 h-12 text-primary mx-auto mb-4" />
         <h2 className="text-2xl font-semibold text-text mb-4">Our Mission</h2>
         <p className="text-text-light text-lg leading-relaxed max-w-3xl mx-auto">
           To provide developers with a fast, reliable, and privacy-focused toolkit that
@@ -90,7 +90,7 @@ export default function AboutPage() {
               className="flex gap-4"
             >
               <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <DynamicIcon name={feature.icon} className="w-6 h-6 text-primary" />
+                <AppIcon name={feature.icon} className="w-6 h-6 text-primary" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-text mb-2">{feature.title}</h3>
@@ -176,7 +176,7 @@ export default function AboutPage() {
           onClick={() => navigate('/tools')}
           className="px-8 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors"
         >
-          <DynamicIcon name="rocket" className="w-5 h-5 inline mr-2" />
+          <AppIcon name="rocket" className="w-5 h-5 inline mr-2" />
           Explore Tools
         </motion.button>
       </motion.div>

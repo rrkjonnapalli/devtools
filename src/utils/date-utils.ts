@@ -54,17 +54,8 @@ export const duration = (_d1: Date, _d2: Date, timeZone = 'UTC') => {
   };
 }
 
-// // Example
-// const d1 = new Date('2020-01-01T00:00:00Z');
-// const d2 = new Date('2023-03-06T07:08:10Z');
-// console.log(diffDetailed(d1, d2));
-
 export const getCompatibleDate = (date: ZonedDateTime | null) => {
   if (!date) return null;
   // Convert your ZonedDateTime to a compatible format
   return parseDate(date.toString());
-  // return new CalendarDateTime(
-  //   date.year, date.month, date.day, 
-  //   date.hour, date.minute, date.second
-  // );
 };

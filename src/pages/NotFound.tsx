@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
-import { DynamicIcon } from 'lucide-react/dynamic';
+import { AppIcon } from '@/shared/icons';
 
 export default function NotFound() {
   return (
@@ -14,7 +14,7 @@ export default function NotFound() {
           className="mb-8"
         >
           <div className="w-24 h-24 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-            <DynamicIcon 
+            <AppIcon 
               name="compass" 
               className="w-12 h-12 text-primary" 
             />
@@ -44,7 +44,7 @@ export default function NotFound() {
                 whileTap={{ scale: 0.98 }}
                 className="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors"
               >
-                <DynamicIcon name="home" className="w-4 h-4 inline mr-2" />
+                <AppIcon name="home" className="w-4 h-4 inline mr-2" />
                 Back to Home
               </motion.button>
             </Link>
@@ -53,7 +53,7 @@ export default function NotFound() {
               onClick={() => window.history.back()}
               className="px-6 py-3 border border-border text-text rounded-lg font-medium hover:bg-alt transition-colors"
             >
-              <DynamicIcon name="arrow-left" className="w-4 h-4 inline mr-2" />
+              <AppIcon name="arrow-left" className="w-4 h-4 inline mr-2" />
               Go Back
             </button>
           </div>

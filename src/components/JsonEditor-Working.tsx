@@ -15,7 +15,6 @@ export default function AppEditor({ value, onChange: setValue }: { value: string
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   const onChange = useCallback((val: string) => {
-    console.log('val:', val);
     setValue?.(val);
   }, [setValue]);
 

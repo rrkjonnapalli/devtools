@@ -1,10 +1,10 @@
 import AppEditor from "@components/JsonEditor";
 import { motion } from 'framer-motion';
-import { DynamicIcon } from "lucide-react/dynamic";
 import * as _ from 'lodash';
 import { addToast, Select, SelectItem } from "@heroui/react";
 import { useState } from "react";
 import { sortJSON } from "@utils/jsondiff";
+import { AppIcon } from "@/shared/icons";
 
 const toolKey = 'json-format-data';
 
@@ -114,7 +114,7 @@ export default function JsonFormatter() {
             className="action-button"
           >
             <span className="button-icon">
-              <DynamicIcon name="unlock" className="icon" />
+              <AppIcon name="unlock" className="icon" />
             </span>
             Unescape
           </motion.button>
@@ -126,7 +126,7 @@ export default function JsonFormatter() {
             className="action-button"
           >
             <span className="button-icon">
-              <DynamicIcon name="arrow-up-down" className="icon" />
+              <AppIcon name="arrow-up-down" className="icon" />
             </span>
             Sort
           </motion.button>
@@ -138,7 +138,7 @@ export default function JsonFormatter() {
             className="action-button primary"
           >
             <span className="button-icon">
-              <DynamicIcon name="sparkles" className="icon" />
+              <AppIcon name="sparkles" className="icon" />
             </span>
             Format
           </motion.button>

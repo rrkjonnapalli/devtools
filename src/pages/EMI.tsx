@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import { DynamicIcon } from "lucide-react/dynamic";
 import { addToast, DatePicker, Tooltip } from "@heroui/react";
 import { useState } from "react";
 import { getLocalTimeZone, now } from '@internationalized/date';
 import { useDateFormatter } from '@react-aria/i18n';
 import { TInputField } from '@/shared/TInputField';
+import { AppIcon } from '@/shared/icons';
 // import '../styles/EMI.css';
 
 const toolKey = 'emi-data';
@@ -150,7 +150,7 @@ export default function Emi() {
           onClick={calculate}
           className="w-full py-3 bg-primary text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
         >
-          <DynamicIcon name="calculator" className="w-5 h-5" />
+          <AppIcon name="calculator" className="w-5 h-5" />
           Calculate EMI
         </motion.button>
       </div>
@@ -162,7 +162,7 @@ export default function Emi() {
           <div className="card bg-alt p-6 text-center">
             <div className="flex items-center justify-center gap-4 mb-4">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <DynamicIcon name="calculator" className="text-primary w-6 h-6" />
+                <AppIcon name="calculator" className="text-primary w-6 h-6" />
               </div>
               <div>
                 <p className="text-text-light text-sm">Monthly EMI</p>
@@ -190,7 +190,7 @@ export default function Emi() {
                 <div className="flex items-center justify-between p-4 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl border border-primary/20">
                   <h3 className="text-lg font-semibold text-text">Payment Schedule</h3>
                   <div className="flex items-center gap-2 text-sm text-text-light">
-                    <DynamicIcon name="calendar" className="w-4 h-4" />
+                    <AppIcon name="calendar" className="w-4 h-4" />
                     <span>{emiLog.length} Installments</span>
                   </div>
                 </div>
@@ -228,15 +228,15 @@ export default function Emi() {
                           <p className="text-lg font-bold text-text tabular-nums">
                             <div className='flex flex-col justify-start text-left'>
                               <span className="text-xs text-text-light">
-                                <Tooltip content="Total Principal Paid"><DynamicIcon name="info" className="w-3 h-3 inline mr-1" /></Tooltip>
+                                <Tooltip content="Total Principal Paid"><AppIcon name="info" className="w-3 h-3 inline mr-1" /></Tooltip>
                                 TPP: ₹{log.tpp.toFixed(2)}
                               </span>
                               <span className="text-xs text-text-light">
-                                <Tooltip content="Total Interest Paid"><DynamicIcon name="info" className="w-3 h-3 inline mr-1" /></Tooltip>
+                                <Tooltip content="Total Interest Paid"><AppIcon name="info" className="w-3 h-3 inline mr-1" /></Tooltip>
                                 TIP: ₹{log.tip.toFixed(2)}
                               </span>
                               <span className="text-xs text-text-light">
-                                <Tooltip content="Need to pay"><DynamicIcon name="info" className="w-3 h-3 inline mr-1" /></Tooltip>
+                                <Tooltip content="Need to pay"><AppIcon name="info" className="w-3 h-3 inline mr-1" /></Tooltip>
                                 NTP: ₹{log.ntp.toFixed(2)}
                               </span>
                             </div>

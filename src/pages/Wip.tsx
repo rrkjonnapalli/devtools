@@ -1,5 +1,5 @@
+import { AppIcon } from '@/shared/icons';
 import { motion } from 'framer-motion';
-import { DynamicIcon } from 'lucide-react/dynamic';
 
 export default function WIPPage() {
   return (
@@ -13,7 +13,7 @@ export default function WIPPage() {
           className="mb-6"
         >
           <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-            <DynamicIcon name="construction" className="w-8 h-8 text-primary" />
+            <AppIcon name="construction" className="w-8 h-8 text-primary" />
           </div>
         </motion.div>
 
@@ -35,7 +35,7 @@ export default function WIPPage() {
             onClick={() => window.history.back()}
             className="px-6 py-2 text-primary hover:bg-primary/5 rounded-lg transition-colors"
           >
-            <DynamicIcon name="arrow-left" className="w-4 h-4 inline mr-2" />
+            <AppIcon name="arrow-left" className="w-4 h-4 inline mr-2" />
             Go Back
           </motion.button>
         </motion.div>

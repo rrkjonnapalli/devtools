@@ -1,9 +1,9 @@
 import AppEditor from "@components/JsonEditor";
 import { motion } from 'framer-motion';
-import { DynamicIcon } from "lucide-react/dynamic";
 import { addToast, Select, SelectItem } from "@heroui/react";
 import { useState } from "react";
 import { checkJSONDiff, sortJSON } from "@utils/jsondiff";
+import { AppIcon } from "@/shared/icons";
 
 type Diff = { changed?: boolean; position?: string | number; type?: string;[k: string]: unknown };
 const toolKey = 'json-diff-data';
@@ -88,7 +88,7 @@ export default function JsonDiff() {
             className="action-button"
           >
             <span className="button-icon">
-              <DynamicIcon name="file-diff" className="icon" />
+              <AppIcon name="file-diff" className="icon" />
             </span>
             Check Diff
           </motion.button>
@@ -100,7 +100,7 @@ export default function JsonDiff() {
             className="action-button"
           >
             <span className="button-icon">
-              <DynamicIcon name="eraser" className="icon" />
+              <AppIcon name="eraser" className="icon" />
             </span>
             Clear Diff
           </motion.button>

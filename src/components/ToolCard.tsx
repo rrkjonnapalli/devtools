@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 import type { Tool } from '../config/tools';
 import { random } from '../utils/color-utils';
-import { DynamicIcon } from 'lucide-react/dynamic';
+import { icons } from '@shared/icons';
 
 interface ToolCardProps {
   tool: Tool;
@@ -13,6 +13,7 @@ interface ToolCardProps {
 export default function ToolCard({ tool }: ToolCardProps) {
   const cardColor = random.color();
   const iconGradient = random.deepColor({ c: cardColor });
+  const Icon = icons[tool.icon];
 
   return (
     <motion.div
@@ -34,8 +35,7 @@ export default function ToolCard({ tool }: ToolCardProps) {
                 background: iconGradient,
               }}
             >
-              <DynamicIcon name={tool.icon} className="tool-icon" />
-              {/* <Icon className="tool-icon" /> */}
+              <Icon className="tool-icon" />
             </div>
             <div className="tool-info">
               <h3 className="tool-name">{tool.name}</h3>

@@ -1,8 +1,8 @@
 import AppEditor from "@components/JsonEditor";
 import { motion } from 'framer-motion';
-import { DynamicIcon } from "lucide-react/dynamic";
 import { addToast } from "@heroui/react";
 import { useState } from "react";
+import { AppIcon } from "@/shared/icons";
 
 const toolKey = 'template-data';
 
@@ -49,16 +49,7 @@ export default function JsonDiff() {
       // parsing failed or empty editors — abort
       return;
     }
-    // const allDiffs = (checkJSONDiff(_data1, _data2) as Array<Diff>);
-    // const s1 = sortJSON(_data1);
-    // const s2 = sortJSON(_data2);
-    // _setNextEditor(1, s1);
-    // _setNextEditor(2, s2);
-    // const changes = allDiffs.filter(d => d.changed);
-    // setDifferences(changes);
-    console.log('Template input:', data1, _data2);
     const result = data1.fmt(_data2);
-    console.log('Template result:', result);
     setData3(result);
     localStorage.setItem(toolKey, JSON.stringify({ s1: data1, s2: data2 }));
   }
@@ -77,7 +68,7 @@ export default function JsonDiff() {
             className="action-button"
           >
             <span className="button-icon">
-              <DynamicIcon name="refresh-ccw-dot" className="icon" />
+              <AppIcon name="refresh-ccw-dot" className="icon" />
             </span>
             Populate
           </motion.button>

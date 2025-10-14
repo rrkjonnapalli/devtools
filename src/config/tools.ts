@@ -1,12 +1,12 @@
 // src/config/tools.ts
 
-import  { type IconName } from 'lucide-react/dynamic';
+import { icons } from '@/shared/icons';
 
 export interface Tool {
   id: string;
   name: string;
   description: string;
-  icon: IconName;
+  icon: keyof typeof icons;
   path: string;
   category: string;
   page?: string;
