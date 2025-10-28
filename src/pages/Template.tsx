@@ -34,10 +34,30 @@ export default function JsonDiff() {
   const __getTextFromEditor = (data: string) => {
     try {
       if (!data || data.trim() === '') return null;
-      return JSON.parse(data);
+      
+      // Replace MongoDB-style constructors with their inner values
+      // ObjectId('id') -> 'id'
+      // ISODate('dt') -> 'dt'
+      // NumberLong(123) -> 123
+      const cleaned = data
+        .replace(/ObjectId\s*\(\s*['"]([^'"]+)['"]\s*\)/g, '"$1"')
+        .replace(/ISODate\s*\(\s*['"]([^'"]+)['"]\s*\)/g, '"$1"')
+        .replace(/NumberLong\s*\(\s*(\d+)\s*\)/g, '$1')
+        .replace(/NumberInt\s*\(\s*(\d+)\s*\)/g, '$1')
+        .replace(/Timestamp\s*\(\s*(\d+)\s*,\s*(\d+)\s*\)/g, '$1');
+      
+      // Try parsing as JSON first
+      try {
+        return JSON.parse(cleaned);
+      } catch {
+        // If JSON.parse fails, try evaluating as JavaScript object literal
+        // Wrap in parentheses to treat as expression, use Function constructor for safer eval
+        const result = new Function('return (' + cleaned + ')')();
+        return result;
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
-      addToast({ title: 'Invalid JSON', description: String(msg), variant: 'flat', color: 'danger' });
+      addToast({ title: 'Invalid JSON/JS Object', description: String(msg), variant: 'flat', color: 'danger' });
       return null;
     }
   }
