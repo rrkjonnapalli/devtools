@@ -5,6 +5,7 @@ import { addToast, Select, SelectItem } from "@heroui/react";
 import { useState } from "react";
 import { sortJSON } from "@utils/jsondiff";
 import { AppIcon } from "@/shared/icons";
+import { JSON_FORMATTER_VERSION } from "@/env/env";
 
 const toolKey = 'json-format-data';
 
@@ -13,8 +14,10 @@ const loadInitialData = () => {
   let data = '';
   if (local) {
     try {
-      data = local;
+      const parsed = JSON.parse(local);
+      data = parsed.s1 || '';
     } catch (err) {
+      data = local;
       console.error(`Error parsing local storage data for ${toolKey}`, err);
     }
   }
@@ -48,7 +51,7 @@ export default function JsonFormatter() {
           throw new Error(`Action ${action} is not recognized.`);
         }
       }
-      localStorage.setItem(toolKey, data1);
+      localStorage.setItem(toolKey, JSON.stringify({ s1: data1, v: JSON_FORMATTER_VERSION }));
     } catch (error) {
       let message = '';
       if (error instanceof SyntaxError) {

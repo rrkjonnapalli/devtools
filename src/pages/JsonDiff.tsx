@@ -4,6 +4,7 @@ import { addToast, Select, SelectItem } from "@heroui/react";
 import { useState } from "react";
 import { checkJSONDiff, sortJSON } from "@utils/jsondiff";
 import { AppIcon } from "@/shared/icons";
+import { JSON_DIFF_VERSION } from "@/env/env";
 
 type Diff = { changed?: boolean; position?: string | number; type?: string;[k: string]: unknown };
 const toolKey = 'json-diff-data';
@@ -71,7 +72,7 @@ export default function JsonDiff() {
     const changes = allDiffs.filter(d => d.changed);
     setDifferences(changes);
     setData3(changes.map(d => `${d.position}: ${d.type}`).join('\n'));
-    localStorage.setItem(toolKey, JSON.stringify({ s1, s2 }));
+    localStorage.setItem(toolKey, JSON.stringify({ s1, s2, v: JSON_DIFF_VERSION }));
   }
 
 

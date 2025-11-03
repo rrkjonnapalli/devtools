@@ -3,15 +3,52 @@ import { motion } from 'framer-motion';
 import { addToast } from "@heroui/react";
 import { useState } from "react";
 import { AppIcon } from "@/shared/icons";
+import { renderTemplate } from "@utils/template-renderer";
+import { TEMPLATE_VERSION } from "@/env/env";
 
 const toolKey = 'template-data';
 
+const e1String = `UPDATE 2025-09-03 IST:
+1. Template string has been changed from {key} to \${key}
+2. ON POPULATE click, if no errors, that instance becomes the last saved template.
+3. DOES NOT SUPPORT JS expressions.
+Check for the sample below
+now if / else-if / else , for of loops, let statements, ternary operators are supported
+
+Hello \${name}, welcome to \${company}!
+
+<for |ix, emp| of=employees>
+<let prefix=\${emp.name === 'Ivar' ? "good" : "little ghost"}>
+- \${ix}. <if(emp.type === 1)>Source<else-if(emp.type === 2)>Target<else>Unknown</if> - \${emp.name} \${emp.role}
+- That \${emp.pron} \${emp.name} is \${prefix}.
+
+</for>
+
+Final winner - \${employees[1].name}`;
+const e2String = JSON.stringify({
+  "name": "Tom",
+  "key": "${key}",
+  "company": "DevTools",
+  "employees": [
+    {
+      "name": "Ivar",
+      "type": 1,
+      pron: 'guy',
+      "role": "Problem Solver"
+    },
+    {
+      "name": "Shara",
+      "type": 2,
+      pron: 'girl',
+      "role": "Trouble Maker"
+    }
+  ]
+}, null, 2);
+
 const loadInitialData = () => {
+  let l1 = e1String;
+  let l2 = e2String;
   const local = localStorage.getItem(toolKey);
-  let l1 = `Hello {name}, I'm still working`;
-  let l2 = JSON.stringify({
-    "name": "Tom"
-  });
   if (local) {
     try {
       const parsed = JSON.parse(local);
@@ -25,11 +62,15 @@ const loadInitialData = () => {
 }
 
 export default function JsonDiff() {
-  const { s1, s2 } = loadInitialData();
-  const [data1, setData1] = useState(s1);
-  const [data2, setData2] = useState(s2);
+  const [data1, setData1] = useState(e1String);
+  const [data2, setData2] = useState(e2String);
   const [data3, setData3] = useState('');
 
+  const loadLast = () => {
+    const { s1, s2 } = loadInitialData();
+    setData1(s1);
+    setData2(s2);
+  }
 
   const __getTextFromEditor = (data: string) => {
     try {
@@ -63,15 +104,25 @@ export default function JsonDiff() {
   }
 
   const populate = () => {
-    // const _data1 = __getTextFromEditor(data1);
     const _data2 = __getTextFromEditor(data2);
     if (!data1 || !_data2) {
       // parsing failed or empty editors — abort
       return;
     }
-    const result = data1.fmt(_data2);
-    setData3(result);
-    localStorage.setItem(toolKey, JSON.stringify({ s1: data1, s2: data2 }));
+    
+    try {
+      const result = renderTemplate(data1, _data2);
+      setData3(result);
+      localStorage.setItem(toolKey, JSON.stringify({ s1: data1, s2: data2, v: TEMPLATE_VERSION }));
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      addToast({ 
+        title: 'Template Error', 
+        description: String(msg), 
+        variant: 'flat', 
+        color: 'danger' 
+      });
+    }
   }
 
 
@@ -91,6 +142,17 @@ export default function JsonDiff() {
               <AppIcon name="refresh-ccw-dot" className="icon" />
             </span>
             Populate
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => loadLast()}
+            className="action-button"
+          >
+            <span className="button-icon">
+              <AppIcon name="history" className="icon" />
+            </span>
+            Last Template
           </motion.button>
         </div>
       </div>

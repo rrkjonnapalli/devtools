@@ -5,6 +5,7 @@ import { getLocalTimeZone, now } from '@internationalized/date';
 import { useDateFormatter } from '@react-aria/i18n';
 import { TInputField } from '@/shared/TInputField';
 import { AppIcon } from '@/shared/icons';
+import { EMI_CALCULATOR_VERSION } from '@/env/env';
 // import '../styles/EMI.css';
 
 const toolKey = 'emi-data';
@@ -85,7 +86,7 @@ export default function Emi() {
     const _emi = getEMI(p, r, n);
     setEmi(_emi);
     setEmiLog(getEMILogPerMonth(p, r, n, startDate ? startDate.toDate() : undefined));
-    localStorage.setItem(toolKey, JSON.stringify({ p, r, n }));
+    localStorage.setItem(toolKey, JSON.stringify({ p, r, n, v: EMI_CALCULATOR_VERSION }));
     addToast({
       title: 'EMI Calculated',
       description: `EMI is ${_emi.toFixed(2)}`,

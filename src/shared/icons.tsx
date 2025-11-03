@@ -1,5 +1,6 @@
-import { ArrowLeft, ArrowUpDown, Braces, Calculator, Calendar, CalendarOff, Code, Compass, Construction, Eraser, FileDiff, FileText, Globe, Home, Info, RefreshCcwDot, Rocket, Shield, Sparkles, Target, Unlock, Zap } from "lucide-react";
+import { ArrowLeft, ArrowUpDown, Braces, Calculator, Calendar, CalendarOff, Code, Compass, Construction, Eraser, FileDiff, FileText, Globe, History, Home, Info, RefreshCcwDot, Rocket, Shield, Sparkles, Target, Unlock, Zap } from "lucide-react";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const icons = {
   target: Target,
   rocket: Rocket,
@@ -22,7 +23,8 @@ export const icons = {
   braces: Braces,
   'calendar-off': CalendarOff,
   'file-text': FileText,
-  globe: Globe
+  globe: Globe,
+  history: History
 };
 
 export function AppIcon({ name, className ='' }: { name: keyof typeof icons, className?: string }) {
